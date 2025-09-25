@@ -13,6 +13,8 @@ Ultra-minimalist zsh configuration with a clean lambda prompt and essential shel
 - Essential shell environment setup
 - Loads before .zshrc for proper initialization
 - Homebrew path configuration for macOS
+- Nix package manager support (multi-user and single-user)
+- NIX_PATH configuration for reproducible environments
 
 ## Setup
 
