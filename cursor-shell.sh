@@ -1,11 +1,15 @@
-# foolsgoldtoshi-star's Cursor-Compatible Zsh Config ✨
-# Ultra-minimalist zsh configuration with Cursor terminal compatibility
+#!/bin/bash
+# Cursor-compatible shell script for foolsgoldtoshi-star
+# This script can be used as an alternative shell in Cursor
 
-# Set prompt to clean lambda
+# Clean environment - remove problematic variables
+unset CURSOR_SNAP_ENV_VARS 2>/dev/null || true
+unset dump_zsh_state 2>/dev/null || true
+
+# Set basic environment
+export SHELL="/bin/bash"
+export TERM="xterm-256color"
 export PS1="λ "
-
-# Essential environment variables for Cursor
-export SHELL="/bin/zsh"
 
 # Homebrew environment setup
 if [ -f "/opt/homebrew/bin/brew" ]; then
@@ -27,13 +31,6 @@ if [ -d "/nix/store" ]; then
   export NIX_PATH="nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixpkgs"
 fi
 
-# Cursor compatibility - don't interfere with Cursor's environment setup
-# This prevents the cursor_snap_ENV_VARS error
-unset CURSOR_SNAP_ENV_VARS 2>/dev/null || true
-
-# Clean up any problematic environment variables
-unset dump_zsh_state 2>/dev/null || true
-
 # Ensure basic PATH is set
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
 
@@ -46,3 +43,6 @@ fi
 if [ -d "$HOME/.local/bin" ]; then
   export PATH="$HOME/.local/bin:$PATH"
 fi
+
+# Start bash with clean environment
+exec bash --login
